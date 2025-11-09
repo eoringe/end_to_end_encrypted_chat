@@ -97,6 +97,11 @@ class MessengerClient {
       CKr: CKr, 
       DHr: header.dh_pub, 
       Nr: 0,
+      // Preserve existing sending chain state if it exists
+      CKs: conn.CKs || null,
+      DHs: conn.DHs || null,
+      Ns: conn.Ns !== undefined ? conn.Ns : 0,
+      PNs_to_send: conn.PNs_to_send,
       skippedMessageKeys: conn.skippedMessageKeys || {} 
     };
     return this.conns[name];
