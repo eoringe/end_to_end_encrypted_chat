@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypted Chat</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        #app-container { max-width: 600px; margin: 0 auto; background-color: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        #login-screen { padding: 20px; }
+        #chat-screen { display: none; }
+        #messages { height: 400px; overflow-y: scroll; padding: 15px; border-bottom: 1px solid #ddd; }
+        #messages p { margin: 5px 0; }
+        #messages p b { color: #333; }
+        #message-input { display: flex; padding: 15px; }
+        #message-input input { flex-grow: 1; border: 1px solid #ccc; padding: 10px; border-radius: 5px; }
+        #message-input button { border: none; background-color: #007bff; color: white; padding: 10px 15px; margin-left: 10px; border-radius: 5px; cursor: pointer; }
+        .error { color: red; font-size: 0.9em; }
+        #user-list .user-item { padding: 8px 12px; border: 1px solid #eee; margin-top: 5px; border-radius: 4px; }
+        #user-list .user-item:hover { background-color: #f9f9f9; }
+        #logout-button { 
+            background-color: #dc3545; color: white; border: none; padding: 5px 10px;
+            border-radius: 5px; cursor: pointer; font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <div id="login-screen">
+            <h2>Login or Register</h2>
+            <div id="auth-error" class="error"></div>
+            <div><label for="username">Username:</label><input type="text" id="username" placeholder="alice"></div><br>
+            <div><label for="password">Password:</label><input type="password" id="password" placeholder="pass123"></div><br>
+            <div><button id="login-button">Login</button><button id="register-button">Register</button></div>
+        </div>
+
+        <div id="user-list-screen" style="display: none; padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Welcome, <b id="welcome-username"></b>!</h2>
+                <button id="logout-button">Logout</button>
+            </div>
+            <p>Select a user to chat with:</p>
+            <div id="user-list" style="cursor: pointer;"></div>
+        </div>
+
+        <div id="chat-screen">
+            <div id="chat-header" style="padding: 10px; background-color: #f9f9f9; border-bottom: 1px solid #ddd;">
+                Logged in as: <b id="my-username"></b> | Chatting with: <b id="recipient-username"></b>
+            </div>
+            <div id="messages"></div>
+            <div id="message-input">
+                <input type="text" id="text-input" placeholder="Type your encrypted message...">
+                <button id="send-button">Send</button>
+            </div>
+            <div id="chat-status" class="error" style="padding: 0 15px 15px 15px;"></div>
+        </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="client.js"></script>
+
+</body>
+</html>
